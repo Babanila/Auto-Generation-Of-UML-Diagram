@@ -1,0 +1,8 @@
+.DS_Store
+.vscode
+/.idea
+/node_modules
+/public
+/dist
+/npm-debug.log
+question.md
