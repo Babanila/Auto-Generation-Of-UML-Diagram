@@ -1,23 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-/*
-
-.centered-container {
-    width: 100%;
-    text-align: center;
-}
-
-.inline-element {
-    display: inline-block;
-}
-
-
-*/
-
 const ButtonGroup = styled.div`
     width: 100%;
     text-align: center;
+    margin-bottom: 2em;
 `;
 
 const SingleButton = styled.div`

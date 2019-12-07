@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "@emotion/styled";
 import Amplify from "aws-amplify";
-import aws_config from "../aws-exports";
+import awsmobile from "../aws-exports";
 import UMLDiagram from "./UMLDiagram";
 
-Amplify.configure(aws_config);
+Amplify.configure(awsmobile);
 
 const AppStyles = styled.div`
     text-align: center;

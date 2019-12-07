@@ -2,7 +2,7 @@ type UMLDiagram @model {
     id: ID!
     name: String!
     description: String
-    attribute: String
-    from: String
+    gender: String
+    age: String
     to: String
 }

@@ -7,7 +7,7 @@ import Button from "./Button";
 import { getRandomColor } from "../Helpers/ColorHelper";
 
 const GojsDiagramStyles = styled(GojsDiagram)`
-    width: 70%;
+    width: 90%;
     height: 500px;
     flex: 1 1 auto;
     margin: auto;
@@ -22,17 +22,58 @@ class UMLDiagram extends React.Component {
             selectedNodeKeys: [],
             model: {
                 nodeDataArray: [
-                    { key: "Alpha", label: "Alpha", color: "lightblue" },
-                    { key: "Beta", label: "Beta", color: "yellow" },
-                    { key: "Gamma", label: "Gamma", color: "lightgreen" },
-                    { key: "Delta", label: "Delta", color: "pink" },
-                    { key: "Omega", label: "Omega", color: "grey" },
+                    {
+                        key: "Baba",
+                        id: 1,
+                        name: "Baba",
+                        description: "1st test",
+                        gender: "male",
+                        age: 30,
+                        to: "Mama",
+                    },
+                    {
+                        key: "Mama",
+                        id: 2,
+                        name: "Mama",
+                        description: "2nd test",
+                        gender: "female",
+                        age: 25,
+                        to: "",
+                    },
+                    {
+                        key: "Daughter",
+                        id: 3,
+                        name: "Daughter",
+                        description: "3nd test",
+                        gender: "female",
+                        age: 10,
+                        to: "",
+                    },
+                    {
+                        key: "Son",
+                        id: 4,
+                        name: "Son",
+                        description: "4nd test",
+                        gender: "male",
+                        age: 8,
+                        to: "",
+                    },
+                    {
+                        key: "GrandChild",
+                        id: 5,
+                        name: "GrandChild",
+                        description: "4nd test for baba",
+                        gender: "male",
+                        age: 3,
+                        to: "",
+                    },
                 ],
                 linkDataArray: [
-                    { from: "Alpha", to: "Beta" },
-                    { from: "Gamma", to: "Beta" },
-                    { from: "Beta", to: "Delta" },
-                    { from: "Gamma", to: "Omega" },
+                    { from: "Baba", to: "Mama" },
+                    { from: "Mama", to: "Daughter" },
+                    { from: "Mama", to: "Son" },
+                    { from: "Daughter", to: "GrandChild" },
+                    { from: "Son", to: "GrandChild" },
                 ],
             },
         };
@@ -57,37 +98,17 @@ class UMLDiagram extends React.Component {
 
         const myDiagram = $(go.Diagram, diagramId, {
             initialContentAlignment: go.Spot.LeftCenter,
-        });
-
-        myDiagram.nodeTemplate = $(
-            go.Node,
-            "Auto",
-            $(go.Shape, "RoundedRectangle", { strokeWidth: 0 }, new go.Binding("fill", "color")),
-            $(go.TextBlock, { margin: 8 }, new go.Binding("text", "key"))
-        );
-
-        return myDiagram;
-    };
-
-    /*
-    createDiagram = diagramId => {
-        const $ = go.GraphObject.make;
-
-        const myDiagram = $(go.Diagram, diagramId, {
-            initialContentAlignment: go.Spot.LeftCenter,
             layout: $(go.TreeLayout, {
                 angle: 0,
                 arrangement: go.TreeLayout.ArrangementVertical,
                 treeStyle: go.TreeLayout.StyleLayered,
             }),
+
             isReadOnly: false,
             allowHorizontalScroll: true,
-            allowVerticalScroll: true,
-            allowZoom: false,
             allowSelect: true,
             autoScale: Diagram.Uniform,
             contentAlignment: go.Spot.LeftCenter,
-            TextEdited: this.onTextEdited,
         });
 
         myDiagram.toolManager.panningTool.isEnabled = false;
@@ -99,14 +120,49 @@ class UMLDiagram extends React.Component {
             {
                 selectionChanged: node => this.nodeSelectionHandler(node.key, node.isSelected),
             },
-            $(go.Shape, "RoundedRectangle", { strokeWidth: 0 }, new go.Binding("fill", "color")),
-            $(go.TextBlock, { margin: 8, editable: true }, new go.Binding("text", "label"))
+            $(go.Shape, "Rectangle", { fill: "white", stroke: "black", strokeWidth: 2 }),
+            $(
+                go.Panel,
+                "Table",
+                $(
+                    go.TextBlock,
+                    "alignment: Center",
+                    {
+                        row: 0,
+                        column: 0,
+                        columnSpan: 4,
+                        margin: 3,
+                        font: "bold 15pt sans-serif",
+                    },
+                    new go.Binding("text", "name")
+                ),
+                // Horizontal line before row 1:
+                $(go.RowColumnDefinition, {
+                    row: 1,
+                    column: 0,
+                    separatorStrokeWidth: 1.5,
+                    separatorStroke: "black",
+                }),
+
+                $(go.TextBlock, "id :", { row: 1, column: 0, margin: 2, editable: true }),
+                $(go.TextBlock, { row: 1, column: 1, margin: 2, editable: true }, new go.Binding("text", "id")),
+                $(go.TextBlock, "name :", { row: 2, column: 0, margin: 2, editable: true }),
+                $(go.TextBlock, { row: 2, column: 1, margin: 2, editable: true }, new go.Binding("text", "name")),
+                $(go.TextBlock, "description :", { row: 3, column: 0, margin: 2, editable: true }),
+                $(
+                    go.TextBlock,
+                    { row: 3, column: 1, margin: 2, editable: true },
+                    new go.Binding("text", "description")
+                ),
+                $(go.TextBlock, "gender :", { row: 4, column: 0, margin: 2, editable: true }),
+                $(go.TextBlock, { row: 4, column: 1, margin: 2, editable: true }, new go.Binding("text", "gender")),
+                $(go.TextBlock, "age :", { row: 5, column: 0, margin: 2, editable: true }),
+                $(go.TextBlock, { row: 5, column: 1, margin: 2, editable: true }, new go.Binding("text", "age"))
+            )
         );
 
         return myDiagram;
     };
-
-    */
 
     modelChangeHandler = event => {
         switch (event.eventType) {
