@@ -9,8 +9,8 @@ export const createUmlDiagram = `mutation CreateUmlDiagram(
     id
     name
     description
-    attribute
-    from
+    gender
+    age
     to
   }
 }
@@ -23,8 +23,8 @@ export const updateUmlDiagram = `mutation UpdateUmlDiagram(
     id
     name
     description
-    attribute
-    from
+    gender
+    age
     to
   }
 }
@@ -37,8 +37,8 @@ export const deleteUmlDiagram = `mutation DeleteUmlDiagram(
     id
     name
     description
-    attribute
-    from
+    gender
+    age
     to
   }
 }

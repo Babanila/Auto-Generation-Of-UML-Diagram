@@ -1,0 +1,47 @@
+export const sampleData = [
+  {
+    key: "Baba",
+    id: 1,
+    name: "Baba",
+    description: "1st test",
+    gender: "male",
+    age: 30,
+    to: "Mama",
+  },
+  {
+    key: "Mama",
+    id: 2,
+    name: "Mama",
+    description: "2nd test",
+    gender: "female",
+    age: 25,
+    to: "Daughter",
+  },
+  {
+    key: "Daughter",
+    id: 3,
+    name: "Daughter",
+    description: "3nd test",
+    gender: "female",
+    age: 10,
+    to: "GrandChild",
+  },
+  // {
+  //   key: "Son",
+  //   id: 4,
+  //   name: "Son",
+  //   description: "4nd test",
+  //   gender: "male",
+  //   age: 8,
+  //   to: "GrandChild"
+  // },
+  {
+    key: "GrandChild",
+    id: 5,
+    name: "GrandChild",
+    description: "4nd test for baba",
+    gender: "male",
+    age: 3,
+    to: "",
+  },
+];

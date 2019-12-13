@@ -6,8 +6,8 @@ export const onCreateUmlDiagram = `subscription OnCreateUmlDiagram {
     id
     name
     description
-    attribute
-    from
+    gender
+    age
     to
   }
 }
@@ -17,8 +17,8 @@ export const onUpdateUmlDiagram = `subscription OnUpdateUmlDiagram {
     id
     name
     description
-    attribute
-    from
+    gender
+    age
     to
   }
 }
@@ -28,8 +28,8 @@ export const onDeleteUmlDiagram = `subscription OnDeleteUmlDiagram {
     id
     name
     description
-    attribute
-    from
+    gender
+    age
     to
   }
 }

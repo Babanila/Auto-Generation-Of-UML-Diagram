@@ -6,8 +6,8 @@ export const getUmlDiagram = `query GetUmlDiagram($id: ID!) {
     id
     name
     description
-    attribute
-    from
+    gender
+    age
     to
   }
 }
@@ -22,8 +22,8 @@ export const listUmlDiagrams = `query ListUmlDiagrams(
       id
       name
       description
-      attribute
-      from
+      gender
+      age
       to
     }
     nextToken

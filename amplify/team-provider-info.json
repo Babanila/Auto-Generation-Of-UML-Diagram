@@ -1,15 +1,20 @@
 {
-    "vscode": {
-        "awscloudformation": {
-            "AuthRoleName": "amplify-autogenerationofumld-vscode-54347-authRole",
-            "UnauthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-vscode-54347-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-vscode-54347-authRole",
-            "Region": "eu-central-1",
-            "DeploymentBucketName": "amplify-autogenerationofumld-vscode-54347-deployment",
-            "UnauthRoleName": "amplify-autogenerationofumld-vscode-54347-unauthRole",
-            "StackName": "amplify-autogenerationofumld-vscode-54347",
-            "StackId": "arn:aws:cloudformation:eu-central-1:266990924320:stack/amplify-autogenerationofumld-vscode-54347/2aff6f80-13f5-11ea-a168-06247d577dba",
-            "AmplifyAppId": "dbb6nnduv5ai7"
-        }
+  "vscode": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-autogenerationofumld-vscode-54347-authRole",
+      "UnauthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-vscode-54347-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-vscode-54347-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-autogenerationofumld-vscode-54347-deployment",
+      "UnauthRoleName": "amplify-autogenerationofumld-vscode-54347-unauthRole",
+      "StackName": "amplify-autogenerationofumld-vscode-54347",
+      "StackId": "arn:aws:cloudformation:eu-central-1:266990924320:stack/amplify-autogenerationofumld-vscode-54347/2aff6f80-13f5-11ea-a168-06247d577dba",
+      "AmplifyAppId": "dbb6nnduv5ai7"
+    },
+    "categories": {
+      "auth": {
+        "autogenerationofumld6ba8393d": {}
+      }
     }
+  }
 }

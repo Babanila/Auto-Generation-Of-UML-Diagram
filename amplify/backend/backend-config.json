@@ -1,20 +1,27 @@
 {
-    "api": {
-        "autogenerationofumld": {
-            "service": "AppSync",
-            "providerPlugin": "awscloudformation",
-            "output": {
-                "authConfig": {
-                    "additionalAuthenticationProviders": [],
-                    "defaultAuthentication": {
-                        "authenticationType": "API_KEY",
-                        "apiKeyConfig": {
-                            "description": "GraphQL-Api-Key",
-                            "apiKeyExpirationDays": "120"
-                        }
-                    }
-                }
+  "api": {
+    "autogenerationofumld": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "description": "API KEY",
+              "apiKeyExpirationDays": "120"
             }
+          }
         }
+      }
     }
+  },
+  "auth": {
+    "autogenerationofumld6ba8393d": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
+  }
 }
