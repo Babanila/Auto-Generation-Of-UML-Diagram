@@ -6,17 +6,32 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  color: black;
   background-color: lightgray;
+  color: black;
+`;
+
+const TitleDiv = styled.div`
+  height: 4em;
+  margin: 0;
+  text-align: center;
+`;
+
+const TitleP1 = styled.h2`
+  margin-top: 0.5em;
+`;
+
+const TitleP2 = styled.p`
+  margin-top: -1em;
 `;
 
 const P = styled.p`
-  width: 75%;
+  width: 80%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
   align-self: center;
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 `;
 
@@ -39,10 +54,9 @@ const Input = styled.input`
 const Button = styled.button`
   background-color: #006400;
   font-size: 1rem;
-  font-weight: 900;
   align-self: center;
   border-radius: 4px;
-  padding: 5px;
+  padding: 10px;
   color: #ffffff;
   margin-bottom: 0.5rem;
   &:hover {
@@ -52,13 +66,22 @@ const Button = styled.button`
 `;
 
 const NewUML = props => {
-  const { name, description, gender, age, to, onChange, onSubmit } = props;
+  const { value, onChange, onSubmit } = props;
+  const { key, id, name, description, gender, age, from, to } = value;
   return (
     <Form onSubmit={onSubmit}>
-      <div>
-        <h2>New Node</h2>
-        <h3>Enter details below</h3>
-      </div>
+      <TitleDiv>
+        <TitleP1>New Node</TitleP1>
+        <TitleP2>Please enter details below</TitleP2>
+      </TitleDiv>
+      <P>
+        <Label>Key </Label>
+        <Input name="key" value={key} onChange={onChange} />
+      </P>
+      <P>
+        <Label>Id </Label>
+        <Input name="id" value={id} onChange={onChange} />
+      </P>
       <P>
         <Label>Name </Label>
         <Input name="name" value={name} onChange={onChange} />
@@ -76,12 +99,14 @@ const NewUML = props => {
         <Input name="age" value={age} onChange={onChange} />
       </P>
       <P>
+        <Label>From </Label>
+        <Input name="from" value={from} onChange={onChange} />
+      </P>
+      <P>
         <Label>To </Label>
         <Input name="to" value={to} onChange={onChange} />
       </P>
-      <Button className="search-button" type="submit">
-        Add Node
-      </Button>
+      <Button type="submit">Submit</Button>
     </Form>
   );
 };

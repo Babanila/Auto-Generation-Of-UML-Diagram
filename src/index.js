@@ -7,7 +7,7 @@ import "./index.css";
 const gojsKey = process.env.REACT_APP_GOJS_KEY;
 
 if (gojsKey) {
-    go.licenseKey = gojsKey;
+  go.licenseKey = gojsKey;
 }
 
 ReactDOM.render(<App />, document.getElementById("root"));

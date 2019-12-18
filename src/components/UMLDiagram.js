@@ -1,118 +1,134 @@
 import React from "react";
+
+const UMLDiagram = () => {
+  return <div>This is UML diagram</div>;
+};
+
+export default UMLDiagram;
+
+/*
+import React, { useRef, createRef, useState, useEffect } from "react";
 import styled from "@emotion/styled";
+import axios from "axios";
+import useDeepCompareEffect from "use-deep-compare-effect";
 import * as go from "gojs";
-import { ToolManager, Diagram } from "gojs";
+import { ReactDiagram } from "gojs-react";
+import NewUML from "./NewUMLForm";
+import testData from "../testData";
+
+//
+import { ToolManager } from "gojs";
 import { GojsDiagram, ModelChangeEventType } from "react-gojs";
-import NewUML from "./AddForm";
-import { getRandomColor } from "../Helpers/ColorHelper";
-import { sampleData } from "../sampleData";
 
-const GojsDiagramStyles = styled(GojsDiagram)`
-  width: 90%;
-  height: 500px;
-  flex: 1 1 auto;
-  margin: auto;
-  z-index: 50;
-`;
-
-const Div = styled.div`
-  width: 320px;
+const RootDiv = styled.div`
+  height: 91.7vh;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  position: fixed;
-  top: 9.5em;
-  left: 60%;
-  z-index: 90;
 `;
 
 const ButtonGroup = styled.div`
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
+  height: 4em;
   text-align: center;
-  margin-bottom: 1em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 const Button = styled.div`
   display: inline-block;
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: 900;
   border-radius: 4px;
-  padding: 5px;
+  padding: 10px;
   color: #ffffff;
   cursor: pointer;
   margin-right: 1em;
 `;
 
-class UMLDiagram extends React.Component {
-  nodeId = 0;
+const FormDiv = styled.div`
+  width: 320px;
+  height: 61%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: fixed;
+  top: 8em;
+  left: 60%;
+  z-index: 90;
+`;
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: false,
-      selectedNodeKeys: [],
-      model: {
-        nodeDataArray: sampleData,
-        linkDataArray: [
-          { from: sampleData[0].name, to: sampleData[0].to },
-          { from: sampleData[1].name, to: sampleData[1].to },
-          { from: sampleData[2].name, to: sampleData[2].to },
-          //   { from: sampleData[3].name, to: sampleData[3].to }
-          //   { from: sampleData[4].name, to: sampleData[4].to }
-        ],
-      },
-    };
-  }
+const UMLDiv = styled.div`
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1em;
+  z-index: 70;
+`;
 
-  render() {
-    const { open } = this.state;
-    return [
-      <ButtonGroup key="ButtonGroup">
-        <Button style={{ backgroundColor: "green" }} key="addButton" type="button" onClick={this.showAddForm}>
-          Add Node
-        </Button>
-        <Button style={{ backgroundColor: "red" }} key="deleteButton" type="button" onClick={this.deleteUMLNode}>
-          Remove Node
-        </Button>
-      </ButtonGroup>,
-      <Div key="addForm">{open && <NewUML onSubmit={this.onSubmit} />}</Div>,
-      <GojsDiagramStyles
-        key="gojsDiagram"
-        diagramId="myDiagramDiv"
-        model={this.state.model}
-        createDiagram={this.createDiagram}
-        className="myDiagram"
-        // onModelChange={this.modelChangeHandler}
-      />,
-    ];
-  }
+const GojsDiagramStyles = styled(GojsDiagram)`
+  width: 90%;
+  height: 500px;
+  background: lightgray;
+  z-index: 50;
+`;
 
-  showAddForm = event => {
-    const { value } = event.target;
-    this.setState(prevState => ({
-      open: !prevState.open,
-    }));
-    console.log(value, "XXXX");
+const UMLDiagram = () => {
+  // Declaring local variable
+  const [showForm, setShowForm] = useState(false);
+  const [value, setValue] = useState({
+    key: "",
+    name: "",
+    description: "",
+    gender: "",
+    age: "",
+    to: "",
+  });
+  const [nodeId, setNodeId] = useState(0);
+  const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
+  const [umlData, setUmlData] = useState(testData);
+  const [model, setModel] = useState({
+    nodeDataArray: umlData,
+    linkDataArray: [{ from: umlData[0].key, to: umlData[0].to }],
+  });
+  const [error, setError] = useState("");
+
+  const handleShowAddForm = () => {
+    setShowForm(!showForm);
+    console.log("add button clicked");
   };
 
-  deleteUMLNode = () => {
+  const handleOnChange = event => {
+    event.preventDefault();
+    setValue({ ...value, [event.target.name]: event.target.value });
+  };
+
+  const handleDeleteUMLNode = () => {
     console.log("Remove");
   };
 
-  onSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    this.setState({ open: false });
-    console.log("Want to add new UML node");
+    setShowForm(false);
+    console.log(value, "ZTZTZTZTZTZ");
   };
 
-  createDiagram = diagramId => {
+  const modelChangeHandler = () => {};
+
+  const nodeSelectionHandler = () => {};
+
+  // Create UML Diagram
+  const createDiagram = diagramId => {
     const $ = go.GraphObject.make;
 
     const myDiagram = $(go.Diagram, diagramId, {
       initialContentAlignment: go.Spot.LeftCenter,
+      "undoManager.isEnabled": true,
+      "animationManager.isInitial": false,
       layout: $(go.TreeLayout, {
         angle: 0,
         arrangement: go.TreeLayout.ArrangementVertical,
@@ -121,9 +137,12 @@ class UMLDiagram extends React.Component {
 
       isReadOnly: false,
       allowHorizontalScroll: true,
+      allowVerticalScroll: true,
+      allowZoom: false,
       allowSelect: true,
-      autoScale: Diagram.Uniform,
       contentAlignment: go.Spot.LeftCenter,
+      //   autoScale: Diagram.Uniform,
+      //   TextEdited: this.onTextEdited,
     });
 
     myDiagram.toolManager.panningTool.isEnabled = false;
@@ -133,7 +152,7 @@ class UMLDiagram extends React.Component {
       go.Node,
       "Auto",
       {
-        selectionChanged: node => this.nodeSelectionHandler(node.key, node.isSelected),
+        selectionChanged: node => nodeSelectionHandler(node.key, node.isSelected),
       },
       $(go.Shape, "Rectangle", {
         fill: "white",
@@ -204,131 +223,41 @@ class UMLDiagram extends React.Component {
     return myDiagram;
   };
 
-  modelChangeHandler = event => {
-    switch (event.eventType) {
-      case ModelChangeEventType.Remove:
-        if (event.nodeData) {
-          this.removeNode(event.nodeData.key);
-        }
-        if (event.linkData) {
-          this.removeLink(event.linkData);
-        }
-        break;
-      default:
-        break;
-    }
-  };
+  const updateDiagramProps = event => {};
 
-  addNode = () => {
-    const newNodeId = "node" + this.nodeId;
-    const linksToAdd = this.state.selectedNodeKeys.map(parent => {
-      return { from: parent, to: newNodeId };
-    });
-    this.setState({
-      ...this.state,
-      model: {
-        ...this.state.model,
-        nodeDataArray: [
-          ...this.state.model.nodeDataArray,
-          { key: newNodeId, label: newNodeId, color: getRandomColor() },
-        ],
-        linkDataArray:
-          linksToAdd.length > 0
-            ? [...this.state.model.linkDataArray].concat(linksToAdd)
-            : [...this.state.model.linkDataArray],
-      },
-    });
-    this.nodeId += 1;
-  };
+  return (
+    <RootDiv>
+      <ButtonGroup key="ButtonGroup">
+        <Button style={{ backgroundColor: "green" }} onClick={handleShowAddForm}>
+          Add Node
+        </Button>
+        <Button style={{ backgroundColor: "red" }} onClick={handleDeleteUMLNode}>
+          Remove Node
+        </Button>
+      </ButtonGroup>
 
-  removeNode = nodeKey => {
-    const nodeToRemoveIndex = this.state.model.nodeDataArray.findIndex(node => node.key === nodeKey);
-    if (nodeToRemoveIndex === -1) {
-      return;
-    }
-    this.setState({
-      ...this.state,
-      model: {
-        ...this.state.model,
-        nodeDataArray: [
-          ...this.state.model.nodeDataArray.slice(0, nodeToRemoveIndex),
-          ...this.state.model.nodeDataArray.slice(nodeToRemoveIndex + 1),
-        ],
-      },
-    });
-  };
+      <FormDiv key="addForm">
+        {showForm && <NewUML value={value} onChange={handleOnChange} onSubmit={handleSubmit} />}
+      </FormDiv>
 
-  removeLink = linKToRemove => {
-    const linkToRemoveIndex = this.state.model.linkDataArray.findIndex(
-      link => link.from === linKToRemove.from && link.to === linKToRemove.to
-    );
-    if (linkToRemoveIndex === -1) {
-      return;
-    }
-    return {
-      ...this.state,
-      model: {
-        ...this.state.model,
-        linkDataArray: [
-          ...this.state.model.linkDataArray.slice(0, linkToRemoveIndex),
-          ...this.state.model.linkDataArray.slice(linkToRemoveIndex + 1),
-        ],
-      },
-    };
-  };
-
-  updateNodeText = (nodeKey, text) => {
-    const nodeToUpdateIndex = this.state.model.nodeDataArray.findIndex(node => node.key === nodeKey);
-    if (nodeToUpdateIndex === -1) {
-      return;
-    }
-    this.setState({
-      ...this.state,
-      model: {
-        ...this.state.model,
-        nodeDataArray: [
-          ...this.state.model.nodeDataArray.slice(0, nodeToUpdateIndex),
-          {
-            ...this.state.model.nodeDataArray[nodeToUpdateIndex],
-            label: text,
-          },
-          ...this.state.model.nodeDataArray.slice(nodeToUpdateIndex + 1),
-        ],
-      },
-    });
-  };
-
-  nodeSelectionHandler = (nodeKey, isSelected) => {
-    if (isSelected) {
-      this.setState({
-        ...this.state,
-        selectedNodeKeys: [...this.state.selectedNodeKeys, nodeKey],
-      });
-    } else {
-      const nodeIndexToRemove = this.state.selectedNodeKeys.findIndex(key => key === nodeKey);
-      if (nodeIndexToRemove === -1) {
-        return;
-      }
-      this.setState({
-        ...this.state,
-        selectedNodeKeys: [
-          ...this.state.selectedNodeKeys.slice(0, nodeIndexToRemove),
-          ...this.state.selectedNodeKeys.slice(nodeIndexToRemove + 1),
-        ],
-      });
-    }
-  };
-
-  onTextEdited = e => {
-    const tb = e.subject;
-    if (tb === null) {
-      return;
-    }
-    const node = tb.part;
-    if (node instanceof go.Node) {
-      this.updateNodeText(node.key, tb.text);
-    }
-  };
-}
+      <UMLDiv>
+        {umlData.length === 0 ? (
+          <h3>Loading ...</h3>
+        ) : (
+          <GojsDiagramStyles
+            key="gojsDiagram"
+            diagramId="myDiagramDiv"
+            model={model}
+            createDiagram={createDiagram}
+            className="myDiagram"
+            onModelChange={modelChangeHandler}
+            //   updateDiagramProps={updateDiagramProps}
+          />
+        )}
+      </UMLDiv>
+    </RootDiv>
+  );
+};
 
 export default UMLDiagram;
+*/
