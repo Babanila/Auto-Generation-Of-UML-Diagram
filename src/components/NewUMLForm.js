@@ -74,38 +74,47 @@ const NewUML = props => {
         <TitleP1>New Node</TitleP1>
         <TitleP2>Please enter details below</TitleP2>
       </TitleDiv>
+
       <P>
         <Label>Key </Label>
         <Input name="key" value={key} onChange={onChange} />
       </P>
+
       <P>
         <Label>Id </Label>
         <Input name="id" value={id} onChange={onChange} />
       </P>
+
       <P>
         <Label>Name </Label>
         <Input name="name" value={name} onChange={onChange} />
       </P>
+
       <P>
         <Label>Descrp. </Label>
         <Input name="description" value={description} onChange={onChange} />
       </P>
+
       <P>
         <Label>Gender </Label>
         <Input name="gender" value={gender} onChange={onChange} />
       </P>
+
       <P>
         <Label>Age </Label>
         <Input name="age" value={age} onChange={onChange} />
       </P>
+
       <P>
         <Label>From </Label>
         <Input name="from" value={from} onChange={onChange} />
       </P>
+
       <P>
         <Label>To </Label>
         <Input name="to" value={to} onChange={onChange} />
       </P>
+
       <Button type="submit">Submit</Button>
     </Form>
   );
