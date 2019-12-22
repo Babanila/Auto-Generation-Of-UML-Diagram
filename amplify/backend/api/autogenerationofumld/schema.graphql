@@ -1,8 +1,10 @@
 type UMLDiagram @model(subscriptions: { level: public }) @auth(rules: [{ allow: owner }]) {
-    id: ID!
-    name: String!
-    description: String
-    gender: String
-    age: String
-    to: String
+  id: ID!
+  key: String!
+  name: String!
+  description: String
+  gender: String
+  age: String
+  from: String
+  to: String
 }

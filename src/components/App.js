@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import * as go from "gojs";
 import { ReactDiagram } from "gojs-react";
 import styled from "@emotion/styled";
 import Amplify from "aws-amplify";
@@ -114,7 +113,6 @@ function App() {
       const { data } = await axios.get(url);
       setUmlData(removeDuplicate([...umlData, ...data]));
     } catch (e) {
-      console.log(e);
       setError(e);
     }
   };
@@ -166,7 +164,7 @@ function App() {
     } else if (currentTarget.name === "from") {
       setFrom(currentTarget.value);
     } else if (currentTarget.name === "to") {
-      setFrom(currentTarget.value);
+      setTo(currentTarget.value);
     }
   };
 
