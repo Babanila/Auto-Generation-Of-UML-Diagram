@@ -6,6 +6,7 @@ import Amplify from "aws-amplify";
 import awsmobile from "../aws-exports";
 import NewUML from "./NewUMLForm";
 import initDiagram from "./UMLDiagram";
+import { linkDataDetails, removeObjectDuplicate } from "./Helpers";
 import "./App.css";
 
 Amplify.configure(awsmobile);
@@ -111,28 +112,10 @@ function App() {
 
     try {
       const { data } = await axios.get(url);
-      setUmlData(removeDuplicate([...umlData, ...data]));
+      setUmlData(removeObjectDuplicate([...umlData, ...data]));
     } catch (e) {
       setError(e);
     }
-  };
-
-  const removeDuplicate = allArray =>
-    allArray.filter((item, ind) => ind === allArray.findIndex(elem => elem.key === item.key && elem.id === item.id));
-
-  const indexFinder = (arr, name) => {
-    const result = arr.find(x => x.name === name);
-    return result.key;
-  };
-
-  const linkDataDetails = allData => {
-    const linkData = allData.map((data, i) => ({
-      key: -(i + 1),
-      from: data.from == "" || indexFinder(allData, data.from) == -1 ? "" : indexFinder(allData, data.from),
-      to: data.to == "" || indexFinder(allData, data.to) == -1 ? data.key : indexFinder(allData, data.to),
-    }));
-
-    return linkData;
   };
 
   const handleDefault = event => {
