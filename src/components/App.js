@@ -118,7 +118,7 @@ function App() {
   };
 
   const removeDuplicate = allArray =>
-    allArray.filter((ele, ind) => ind === allArray.findIndex(elem => elem.key === ele.key && elem.id === ele.id));
+    allArray.filter((item, ind) => ind === allArray.findIndex(elem => elem.key === item.key && elem.id === item.id));
 
   const indexFinder = (arr, name) => {
     const result = arr.find(x => x.name === name);

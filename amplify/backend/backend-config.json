@@ -9,19 +9,12 @@
           "defaultAuthentication": {
             "authenticationType": "API_KEY",
             "apiKeyConfig": {
-              "description": "API KEY",
+              "description": "uml-key",
               "apiKeyExpirationDays": "120"
             }
           }
         }
       }
-    }
-  },
-  "auth": {
-    "autogenerationofumld6ba8393d": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
     }
   }
 }

@@ -1,4 +1,4 @@
-type UMLDiagram @model(subscriptions: { level: public }) @auth(rules: [{ allow: owner }]) {
+type UMLDiagram @model {
   id: ID!
   key: String!
   name: String!

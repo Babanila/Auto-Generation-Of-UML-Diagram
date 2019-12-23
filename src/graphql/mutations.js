@@ -7,11 +7,16 @@ export const createUmlDiagram = `mutation CreateUmlDiagram(
 ) {
   createUMLDiagram(input: $input, condition: $condition) {
     id
+    key
     name
     description
     gender
     age
+    from
     to
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 `;
@@ -21,11 +26,16 @@ export const updateUmlDiagram = `mutation UpdateUmlDiagram(
 ) {
   updateUMLDiagram(input: $input, condition: $condition) {
     id
+    key
     name
     description
     gender
     age
+    from
     to
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 `;
@@ -35,11 +45,16 @@ export const deleteUmlDiagram = `mutation DeleteUmlDiagram(
 ) {
   deleteUMLDiagram(input: $input, condition: $condition) {
     id
+    key
     name
     description
     gender
     age
+    from
     to
+    _version
+    _deleted
+    _lastChangedAt
   }
 }
 `;

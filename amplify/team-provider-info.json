@@ -1,20 +1,15 @@
 {
-  "vscode": {
+  "mac": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-autogenerationofumld-vscode-54347-authRole",
-      "UnauthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-vscode-54347-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-vscode-54347-authRole",
+      "AuthRoleName": "amplify-autogenerationofumld-mac-22645-authRole",
+      "UnauthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-mac-22645-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-mac-22645-authRole",
       "Region": "eu-central-1",
-      "DeploymentBucketName": "amplify-autogenerationofumld-vscode-54347-deployment",
-      "UnauthRoleName": "amplify-autogenerationofumld-vscode-54347-unauthRole",
-      "StackName": "amplify-autogenerationofumld-vscode-54347",
-      "StackId": "arn:aws:cloudformation:eu-central-1:266990924320:stack/amplify-autogenerationofumld-vscode-54347/2aff6f80-13f5-11ea-a168-06247d577dba",
-      "AmplifyAppId": "dbb6nnduv5ai7"
-    },
-    "categories": {
-      "auth": {
-        "autogenerationofumld6ba8393d": {}
-      }
+      "DeploymentBucketName": "amplify-autogenerationofumld-mac-22645-deployment",
+      "UnauthRoleName": "amplify-autogenerationofumld-mac-22645-unauthRole",
+      "StackName": "amplify-autogenerationofumld-mac-22645",
+      "StackId": "arn:aws:cloudformation:eu-central-1:266990924320:stack/amplify-autogenerationofumld-mac-22645/491cf8e0-2523-11ea-8021-02ae4173b208",
+      "AmplifyAppId": "d2hsn6ciqqn9h8"
     }
   }
 }
