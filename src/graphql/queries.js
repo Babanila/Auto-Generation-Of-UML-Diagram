@@ -22,15 +22,13 @@ export const syncUmlDiagrams = `query SyncUmlDiagrams(
       age
       from
       to
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
     startedAt
   }
 }
 `;
+
 export const getUmlDiagram = `query GetUmlDiagram($id: ID!) {
   getUMLDiagram(id: $id) {
     id
@@ -41,12 +39,10 @@ export const getUmlDiagram = `query GetUmlDiagram($id: ID!) {
     age
     from
     to
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 `;
+
 export const listUmlDiagrams = `query ListUmlDiagrams(
   $filter: ModelUMLDiagramFilterInput
   $limit: Int
@@ -62,9 +58,6 @@ export const listUmlDiagrams = `query ListUmlDiagrams(
       age
       from
       to
-      _version
-      _deleted
-      _lastChangedAt
     }
     nextToken
     startedAt

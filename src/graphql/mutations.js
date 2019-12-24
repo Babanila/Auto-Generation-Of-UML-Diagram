@@ -14,12 +14,10 @@ export const createUmlDiagram = `mutation CreateUmlDiagram(
     age
     from
     to
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 `;
+
 export const updateUmlDiagram = `mutation UpdateUmlDiagram(
   $input: UpdateUMLDiagramInput!
   $condition: ModelUMLDiagramConditionInput
@@ -33,12 +31,10 @@ export const updateUmlDiagram = `mutation UpdateUmlDiagram(
     age
     from
     to
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 `;
+
 export const deleteUmlDiagram = `mutation DeleteUmlDiagram(
   $input: DeleteUMLDiagramInput!
   $condition: ModelUMLDiagramConditionInput
@@ -52,9 +48,6 @@ export const deleteUmlDiagram = `mutation DeleteUmlDiagram(
     age
     from
     to
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 `;

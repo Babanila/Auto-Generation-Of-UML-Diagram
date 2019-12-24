@@ -67,7 +67,7 @@ const Button = styled.button`
 
 const NewUML = props => {
   const { value, onChange, onSubmit } = props;
-  const { key, id, name, description, gender, age, from, to } = value;
+  const { key, name, description, gender, age, from, to } = value;
   return (
     <Form onSubmit={onSubmit}>
       <TitleDiv>
@@ -78,11 +78,6 @@ const NewUML = props => {
       <P>
         <Label>Key </Label>
         <Input name="key" value={key} onChange={onChange} />
-      </P>
-
-      <P>
-        <Label>Id </Label>
-        <Input name="id" value={id} onChange={onChange} />
       </P>
 
       <P>

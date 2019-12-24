@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ReactDiagram } from "gojs-react";
 import styled from "@emotion/styled";
-import Amplify from "aws-amplify";
+import Amplify, { API, graphqlOperation } from "aws-amplify";
 import awsmobile from "../aws-exports";
 import NewUML from "./NewUMLForm";
 import initDiagram from "./UMLDiagram";
 import { linkDataDetails, removeObjectDuplicate } from "./Helpers";
+import { createUmlDiagram, updateUmlDiagram, deleteUmlDiagram } from "../graphql/mutations";
+import { syncUmlDiagrams, getUmlDiagram, listUmlDiagrams } from "../graphql/queries";
+import testData from "../testSampleData";
 import "./App.css";
 
 Amplify.configure(awsmobile);
@@ -87,16 +90,10 @@ const ErrorDiv = styled.div`
   z-index: 50;
 `;
 
-// This function handles any changes to the GoJS model and his is where updates to the React App takes place.
-function handleModelChange(changes) {
-  alert("UML model changed!");
-}
-
 function App() {
   const [showForm, setShowForm] = useState(false);
   const [umlData, setUmlData] = useState([]);
   const [key, setKey] = useState("");
-  const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [gender, setGender] = useState("");
@@ -107,20 +104,26 @@ function App() {
 
   useEffect(() => {}, [umlData]);
 
-  const fetchData = async () => {
-    const url = `src/sampleData.json`;
+  // Create in Database
+  const createNewUmlDiagram = async umlData => {
+    await API.graphql(graphqlOperation(createUmlDiagram, { input: umlData }));
+    console.log("UML Diagram created");
+  };
 
-    try {
-      const { data } = await axios.get(url);
-      setUmlData(removeObjectDuplicate([...umlData, ...data]));
-    } catch (e) {
-      setError(e);
-    }
+  // Fetch from Database
+  const fetchUmlDiagram = async () => {
+    const { data, errors } = await API.graphql(graphqlOperation(listUmlDiagrams));
+    data ? setUmlData(data.listUMLDiagrams.items) : setError(errors[0].message);
+  };
+
+  // This function handles any changes to the GoJS model and his is where updates to the React App takes place.
+  const handleModelChange = changes => {
+    alert("UML model changed!");
   };
 
   const handleDefault = event => {
     event.preventDefault();
-    fetchData();
+    fetchUmlDiagram();
   };
 
   const handleShowAddForm = event => {
@@ -133,17 +136,15 @@ function App() {
     const { currentTarget } = event;
 
     if (currentTarget.name === "key") {
-      setKey(parseInt(currentTarget.value));
-    } else if (currentTarget.name === "id") {
-      setId(parseInt(currentTarget.value));
-    } else if (currentTarget.name === "age") {
-      setAge(parseInt(currentTarget.value));
+      setKey(currentTarget.value);
     } else if (currentTarget.name === "name") {
       setName(currentTarget.value);
     } else if (currentTarget.name === "description") {
       setDescription(currentTarget.value);
     } else if (currentTarget.name === "gender") {
       setGender(currentTarget.value);
+    } else if (currentTarget.name === "age") {
+      setAge(currentTarget.value);
     } else if (currentTarget.name === "from") {
       setFrom(currentTarget.value);
     } else if (currentTarget.name === "to") {
@@ -153,12 +154,35 @@ function App() {
 
   const handleDeleteUMLNode = event => {
     event.preventDefault();
+    // const umlDetails = {
+    //   key: "999",
+    //   name: "UML 99",
+    //   description: "Learn GraphQL",
+    //   gender: "male",
+    //   age: "999",
+    //   from: null,
+    //   to: null,
+    // };
+    // createNewUmlDiagram(umlDetails);
   };
 
   const handleSubmit = event => {
     event.preventDefault();
-    const newValue = { key, id, name, description, gender, age, from, to };
-    setUmlData([...umlData, newValue]);
+
+    const newUmlDetails = {
+      key: key,
+      name: name ? name : null,
+      description: description ? description : null,
+      gender: gender ? gender : null,
+      age: age ? age : null,
+      from: from ? from : null,
+      to: to ? to : null,
+    };
+
+    createNewUmlDiagram(newUmlDetails);
+    fetchUmlDiagram();
+
+    // setUmlData(removeObjectDuplicate([...umlData, newUmlDetails]));
     setShowForm(false);
   };
 
@@ -169,7 +193,7 @@ function App() {
       </NavDiv>
 
       <ButtonGroup key="ButtonGroup">
-        <Button onClick={e => handleDefault(e)}>Load External Data</Button>
+        <Button onClick={e => handleDefault(e)}>Load from Database</Button>
         <Button onClick={e => handleShowAddForm(e)}>Add Node</Button>
         <Button onClick={e => handleDeleteUMLNode(e)}>Remove Node</Button>
       </ButtonGroup>
@@ -177,7 +201,7 @@ function App() {
       <FormDiv key="addForm">
         {showForm && (
           <NewUML
-            value={(key, id, name, description, gender, age, from)}
+            value={(key, name, description, gender, age, from)}
             onChange={e => handleOnChange(e)}
             onSubmit={e => handleSubmit(e)}
           />
