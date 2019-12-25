@@ -6,7 +6,7 @@ import Amplify, { API, graphqlOperation } from "aws-amplify";
 import awsmobile from "../aws-exports";
 import NewUML from "./NewUMLForm";
 import initDiagram from "./UMLDiagram";
-import { linkDataDetails, removeObjectDuplicate } from "./Helpers";
+import { linkDataDetails, checkForDuplicate } from "./Helpers";
 import { createUmlDiagram, updateUmlDiagram, deleteUmlDiagram } from "../graphql/mutations";
 import { syncUmlDiagrams, getUmlDiagram, listUmlDiagrams } from "../graphql/queries";
 import testData from "../testSampleData";
@@ -168,10 +168,11 @@ function App() {
 
   const handleSubmit = event => {
     event.preventDefault();
+    fetchUmlDiagram();
 
     const newUmlDetails = {
       key: key,
-      name: name ? name : null,
+      name: name,
       description: description ? description : null,
       gender: gender ? gender : null,
       age: age ? age : null,
@@ -179,10 +180,17 @@ function App() {
       to: to ? to : null,
     };
 
-    createNewUmlDiagram(newUmlDetails);
-    fetchUmlDiagram();
+    if (checkForDuplicate(umlData, name)) {
+      alert("Name already exist");
+      return;
+    } else if (checkForDuplicate(umlData, key)) {
+      alert("Key already exist");
+      return;
+    } else {
+      createNewUmlDiagram(newUmlDetails);
+      fetchUmlDiagram();
+    }
 
-    // setUmlData(removeObjectDuplicate([...umlData, newUmlDetails]));
     setShowForm(false);
   };
 

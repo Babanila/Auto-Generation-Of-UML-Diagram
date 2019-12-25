@@ -17,3 +17,6 @@ export const linkDataDetails = allData => {
 
 export const removeObjectDuplicate = allArray =>
   allArray.filter((item, ind) => ind === allArray.findIndex(elem => elem.key === item.key && elem.id === item.id));
+
+export const checkForDuplicate = (allArray, objKey) =>
+  allArray.filter(elem => elem.name === objKey || elem.key === objKey).length > 0;
