@@ -11,9 +11,6 @@ export const onCreateUmlDiagram = `subscription OnCreateUmlDiagram {
     age
     from
     to
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 `;
@@ -27,9 +24,6 @@ export const onUpdateUmlDiagram = `subscription OnUpdateUmlDiagram {
     age
     from
     to
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 `;
@@ -43,9 +37,6 @@ export const onDeleteUmlDiagram = `subscription OnDeleteUmlDiagram {
     age
     from
     to
-    _version
-    _deleted
-    _lastChangedAt
   }
 }
 `;

@@ -7,9 +7,8 @@ import awsmobile from "../aws-exports";
 import NewUML from "./NewUMLForm";
 import initDiagram from "./UMLDiagram";
 import { linkDataDetails, checkForDuplicate, removeObjectDuplicate } from "./Helpers";
-import { createUmlDiagram, updateUmlDiagram, deleteUmlDiagram } from "../graphql/mutations";
-import { syncUmlDiagrams, getUmlDiagram, listUmlDiagrams } from "../graphql/queries";
-import testData from "../testSampleData";
+import { createUmlDiagram, deleteUmlDiagram } from "../graphql/mutations";
+import { listUmlDiagrams } from "../graphql/queries";
 import "./App.css";
 
 Amplify.configure(awsmobile);
