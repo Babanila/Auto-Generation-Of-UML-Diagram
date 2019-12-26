@@ -6,6 +6,7 @@ function initDiagram() {
   const diagram = $(go.Diagram, {
     initialContentAlignment: go.Spot.LeftCenter,
     "undoManager.isEnabled": true,
+    "undoManager.maxHistoryLength": 0,
     "clickCreatingTool.archetypeNodeData": { name: "new node", color: "lightblue" },
     // Layout setting
     layout: $(go.TreeLayout, {
@@ -32,6 +33,9 @@ function initDiagram() {
   diagram.nodeTemplate = $(
     go.Node,
     "Auto", // the Shape will go around the TextBlock
+    {
+      // selectionChanged: node => nodeSelectionHandler(node.key, node.isSelected),
+    },
     new go.Binding("location", "loc", go.Point.parse).makeTwoWay(go.Point.stringify),
     $(
       go.Shape,

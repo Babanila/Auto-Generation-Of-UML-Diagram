@@ -6,7 +6,7 @@ import Amplify, { API, graphqlOperation } from "aws-amplify";
 import awsmobile from "../aws-exports";
 import NewUML from "./NewUMLForm";
 import initDiagram from "./UMLDiagram";
-import { linkDataDetails, checkForDuplicate } from "./Helpers";
+import { linkDataDetails, checkForDuplicate, removeObjectDuplicate } from "./Helpers";
 import { createUmlDiagram, updateUmlDiagram, deleteUmlDiagram } from "../graphql/mutations";
 import { syncUmlDiagrams, getUmlDiagram, listUmlDiagrams } from "../graphql/queries";
 import testData from "../testSampleData";
@@ -100,30 +100,54 @@ function App() {
   const [age, setAge] = useState("");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
+  const [selectedNodeKeys, setSelectedNodeKeys] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {}, [umlData]);
 
-  // Create in Database
+  // Used for only testing data locally without AWS connection
+  const fetchData = async () => {
+    const url = `src/sampleData.json`;
+
+    try {
+      const { data } = await axios.get(url);
+      console.log("first", data);
+      setUmlData(removeObjectDuplicate([...umlData, ...data]));
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  // Create UML in AWS Database
   const createNewUmlDiagram = async umlData => {
     await API.graphql(graphqlOperation(createUmlDiagram, { input: umlData }));
     console.log("UML Diagram created");
   };
 
-  // Fetch from Database
+  // Delete UML from AWS Database
+  const deleteDiagram = async inputId => {
+    await API.graphql(graphqlOperation(deleteUmlDiagram, { input: inputId }));
+    console.log("UML Diagram deleted");
+  };
+
+  // Fetch from AWS Database
   const fetchUmlDiagram = async () => {
     const { data, errors } = await API.graphql(graphqlOperation(listUmlDiagrams));
     data ? setUmlData(data.listUMLDiagrams.items) : setError(errors[0].message);
   };
 
   // This function handles any changes to the GoJS model and his is where updates to the React App takes place.
-  const handleModelChange = changes => {
+  const handleModelChange = event => {
+    // const { name } = event.target;
+    // console.log(event.target);
+    console.log("UML model changed!");
     alert("UML model changed!");
   };
 
   const handleDefault = event => {
     event.preventDefault();
     fetchUmlDiagram();
+    // fetchData();
   };
 
   const handleShowAddForm = event => {
@@ -154,16 +178,8 @@ function App() {
 
   const handleDeleteUMLNode = event => {
     event.preventDefault();
-    // const umlDetails = {
-    //   key: "999",
-    //   name: "UML 99",
-    //   description: "Learn GraphQL",
-    //   gender: "male",
-    //   age: "999",
-    //   from: null,
-    //   to: null,
-    // };
-    // createNewUmlDiagram(umlDetails);
+    // deleteDiagram();
+    console.log("About to delete uml");
   };
 
   const handleSubmit = event => {
@@ -209,7 +225,7 @@ function App() {
       <FormDiv key="addForm">
         {showForm && (
           <NewUML
-            value={(key, name, description, gender, age, from)}
+            value={(key, name, description, gender, age, from, to)}
             onChange={e => handleOnChange(e)}
             onSubmit={e => handleSubmit(e)}
           />
