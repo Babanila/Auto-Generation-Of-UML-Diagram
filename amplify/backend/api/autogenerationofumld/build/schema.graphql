@@ -1,0 +1,186 @@
+type UMLDiagram {
+  id: ID!
+  key: String!
+  name: String!
+  description: String
+  gender: String
+  age: String
+  from: String
+  to: String
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelUMLDiagramConnection {
+  items: [UMLDiagram]
+  nextToken: String
+  startedAt: AWSTimestamp
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelUMLDiagramFilterInput {
+  id: ModelIDInput
+  key: ModelStringInput
+  name: ModelStringInput
+  description: ModelStringInput
+  gender: ModelStringInput
+  age: ModelStringInput
+  from: ModelStringInput
+  to: ModelStringInput
+  and: [ModelUMLDiagramFilterInput]
+  or: [ModelUMLDiagramFilterInput]
+  not: ModelUMLDiagramFilterInput
+}
+
+type Query {
+  syncUMLDiagrams(
+    filter: ModelUMLDiagramFilterInput
+    limit: Int
+    nextToken: String
+    lastSync: AWSTimestamp
+  ): ModelUMLDiagramConnection
+  getUMLDiagram(id: ID!): UMLDiagram
+  listUMLDiagrams(filter: ModelUMLDiagramFilterInput, limit: Int, nextToken: String): ModelUMLDiagramConnection
+}
+
+input CreateUMLDiagramInput {
+  id: ID
+  key: String!
+  name: String!
+  description: String
+  gender: String
+  age: String
+  from: String
+  to: String
+  _version: Int
+}
+
+input UpdateUMLDiagramInput {
+  id: ID!
+  key: String
+  name: String
+  description: String
+  gender: String
+  age: String
+  from: String
+  to: String
+  _version: Int
+}
+
+input DeleteUMLDiagramInput {
+  id: ID
+  _version: Int
+}
+
+type Mutation {
+  createUMLDiagram(input: CreateUMLDiagramInput!, condition: ModelUMLDiagramConditionInput): UMLDiagram
+  updateUMLDiagram(input: UpdateUMLDiagramInput!, condition: ModelUMLDiagramConditionInput): UMLDiagram
+  deleteUMLDiagram(input: DeleteUMLDiagramInput!, condition: ModelUMLDiagramConditionInput): UMLDiagram
+}
+
+input ModelUMLDiagramConditionInput {
+  key: ModelStringInput
+  name: ModelStringInput
+  description: ModelStringInput
+  gender: ModelStringInput
+  age: ModelStringInput
+  from: ModelStringInput
+  to: ModelStringInput
+  and: [ModelUMLDiagramConditionInput]
+  or: [ModelUMLDiagramConditionInput]
+  not: ModelUMLDiagramConditionInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Subscription {
+  onCreateUMLDiagram: UMLDiagram @aws_subscribe(mutations: ["createUMLDiagram"])
+  onUpdateUMLDiagram: UMLDiagram @aws_subscribe(mutations: ["updateUMLDiagram"])
+  onDeleteUMLDiagram: UMLDiagram @aws_subscribe(mutations: ["deleteUMLDiagram"])
+}

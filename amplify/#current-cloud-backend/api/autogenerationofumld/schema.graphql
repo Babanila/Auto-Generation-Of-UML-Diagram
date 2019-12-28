@@ -1,0 +1,10 @@
+type UMLDiagram @model {
+  id: ID!
+  key: String!
+  name: String!
+  description: String
+  gender: String
+  age: String
+  from: String
+  to: String
+}

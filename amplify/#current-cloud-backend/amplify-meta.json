@@ -1,0 +1,60 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-autogenerationofumld-mac-22645-authRole",
+      "UnauthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-mac-22645-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::266990924320:role/amplify-autogenerationofumld-mac-22645-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-autogenerationofumld-mac-22645-deployment",
+      "UnauthRoleName": "amplify-autogenerationofumld-mac-22645-unauthRole",
+      "StackName": "amplify-autogenerationofumld-mac-22645",
+      "StackId": "arn:aws:cloudformation:eu-central-1:266990924320:stack/amplify-autogenerationofumld-mac-22645/491cf8e0-2523-11ea-8021-02ae4173b208",
+      "AmplifyAppId": "d2hsn6ciqqn9h8"
+    }
+  },
+  "api": {
+    "autogenerationofumld": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [],
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "description": "uml-key",
+              "apiKeyExpirationDays": "120"
+            }
+          }
+        },
+        "GraphQLAPIIdOutput": "wp5bmhpbqne7lmp2njgbv46eia",
+        "GraphQLAPIEndpointOutput": "https://2dj6mbletra4nbzh3hplp553hi.appsync-api.eu-central-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-ch3odljs2fd2tkkzrk57iffwwu"
+      },
+      "lastPushTimeStamp": "2019-12-26T13:46:39.554Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-autogenerationofumld-mac-22645-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apiautogenerationofumld"
+      },
+      "lastPushDirHash": "fXw/Jul/GxCecpMXhjTYx7nV5+w="
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "service": "S3AndCloudFront",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "S3BucketSecureURL": "https://thesis-hosting-mac.s3.amazonaws.com",
+        "WebsiteURL": "http://thesis-hosting-mac.s3-website.eu-central-1.amazonaws.com",
+        "Region": "eu-central-1",
+        "HostingBucketName": "thesis-hosting-mac"
+      },
+      "lastPushTimeStamp": "2019-12-26T13:46:39.551Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-autogenerationofumld-mac-22645-deployment/amplify-cfn-templates/hosting/template.json",
+        "logicalId": "hostingS3AndCloudFront"
+      },
+      "lastPushDirHash": "JmuDAa7qosOL9LMQS8zGGlnoIgA="
+    }
+  }
+}
