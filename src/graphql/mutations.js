@@ -17,7 +17,6 @@ export const createUmlDiagram = `mutation CreateUmlDiagram(
   }
 }
 `;
-
 export const updateUmlDiagram = `mutation UpdateUmlDiagram(
   $input: UpdateUMLDiagramInput!
   $condition: ModelUMLDiagramConditionInput
@@ -34,7 +33,6 @@ export const updateUmlDiagram = `mutation UpdateUmlDiagram(
   }
 }
 `;
-
 export const deleteUmlDiagram = `mutation DeleteUmlDiagram(
   $input: DeleteUMLDiagramInput!
   $condition: ModelUMLDiagramConditionInput

@@ -28,7 +28,6 @@ export const syncUmlDiagrams = `query SyncUmlDiagrams(
   }
 }
 `;
-
 export const getUmlDiagram = `query GetUmlDiagram($id: ID!) {
   getUMLDiagram(id: $id) {
     id
@@ -42,7 +41,6 @@ export const getUmlDiagram = `query GetUmlDiagram($id: ID!) {
   }
 }
 `;
-
 export const listUmlDiagrams = `query ListUmlDiagrams(
   $filter: ModelUMLDiagramFilterInput
   $limit: Int
