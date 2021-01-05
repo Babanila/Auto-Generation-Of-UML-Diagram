@@ -33,7 +33,7 @@
     "@emotion/styled": "^10.0.23",
     "aws-amplify": "^1.2.4",
     "aws-amplify-react": "^2.5.4",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "cross-env": "^6.0.3",
     "gojs": "^2.1.2",
     "gojs-react": "^1.0.4",
